@@ -1,0 +1,21 @@
+{
+    "name": "multi-device_call-tool",
+    "version": "1.0.0",
+    "description": "## Project Name: Multi-Device Call Tool ## Team Members: Solo (Nontuthuzelo Ngwenya) ## Description of the Project:  The Multi-Device Call Tool allows users to link multiple devices (such as a mobile phone and tablets) to a single phone number. Users can register their devices, choose which device to activate for receiving calls, and manage device registrations seamlessly. This tool aims to provide flexibility and convenience by allowing calls to be routed to any of the registered devices based on user preference.",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "bcryptjs": "^2.4.3",
+      "express": "^4.19.2",
+      "jsonwebtoken": "^9.0.2",
+      "mongodb": "^6.8.0",
+      "mongoose": "^8.5.3",
+      "multi-device_call-tool": "file:"
+    }
+  }
+  
