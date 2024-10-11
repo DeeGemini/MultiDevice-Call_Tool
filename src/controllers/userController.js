@@ -72,6 +72,37 @@ const login = async (req, res) => {
   }
 };
 
+// Add device
+// Add device to user's account
+const addDevice = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (!req.user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const { deviceName, deviceType} = req.body;
+
+    // Chaeck if device already exists
+    let device = await Device.findOne({ user: user._id });
+    if (device) {
+      return res.status(400).json({ message: 'Device already exists' });
+    }
+
+    // Create a new device
+    device = new Device({ deviceName, deviceType, user: user._id });
+    await device.save();
+
+    // Add device to user's accoun
+    user.devices.push(device._id);
+    await user.save();
+    res.status(201).json({ message: 'Device added successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
 
 module.exports = {
     register,
