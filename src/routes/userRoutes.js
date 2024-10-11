@@ -9,3 +9,6 @@ const Device = require('../models/Device');
 router.post('/register', register);
 // Login route
 router.post('/login', login);
+// Device management routes
+router.post('/add-device', authenticateUserAndDevice, addDevice);
+router.post('/remove-device', authenticateUserAndDevice, removeDevice);
