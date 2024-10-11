@@ -191,5 +191,9 @@ const unlinkDevice = async (req, res) => {
 
 module.exports = {
     register,
-    login
+    login,
+    addDevice,
+    removeDevice,
+    linkDevice,
+    unlinkDevice
 }
