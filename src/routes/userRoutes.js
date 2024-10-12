@@ -14,3 +14,5 @@ router.post('/add-device', authenticateUserAndDevice, addDevice);
 router.post('/remove-device', authenticateUserAndDevice, removeDevice);
 router.post('/unlink-device', authenticateUserAndDevice, unlinkDevice);
 router.post('/link-device', authenticateUserAndDevice, linkDevice);
+// Message management routes
+router.post('/sendMessage', authenticateUserAndDevice, sendMessage);
