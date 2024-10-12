@@ -223,6 +223,29 @@ const syncCallLogs = async (userId, callLog) => {
   await Promise.all(user.devices.map(syncToDevice));
 };
 
+// Incoming call log handler
+const handleIncomingCall = async (req, res) => {
+  const { userId, caller, callee, timestamp } = req.body;
+
+  const callLog = { caller, callee, timestamp };
+  // Sync call log across user's devices
+  await syncCallLogs(userId, callLog);
+
+  res.status(200).json({ message: 'Call log synced across devices' });
+};
+
+// Fetch user's linked devices for accessibility
+const getAccessibleDevices = async (req, res) => {
+  const { userId } = req.params;
+
+  const user = await User.findById(userId).populate('devices');
+  if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+  }
+
+  res.status(200).json({ devices: user.devices });
+};
+
 module.exports = {
     register,
     login,
@@ -231,4 +254,6 @@ module.exports = {
     linkDevice,
     unlinkDevice,
     sendMessage,
+    handleIncomingCall,
+    getAccessibleDevices
 }
