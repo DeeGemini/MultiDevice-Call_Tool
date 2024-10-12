@@ -188,6 +188,40 @@ const unlinkDevice = async (req, res) => {
   res.status(200).json({ message: 'Device unlinked successfully' });
 };
 
+// Sending messages across linked devices
+const sendMessage = async (req, res) => {
+  const { message, senderId, receiverId } = req.body;
+  // Fetch the sender's linked device
+  const sender = await User.findById(senderId).populate('devices');
+  if (!sender) {
+    return res.status(404).json({ message: 'Sender not found' });
+  }
+  // Fetch the receiver's linked device
+  const receiver = await User.findById(receiverId).populate('devices');
+  if (!receiver) {
+    return res.status(404).json({ message: 'Receiver not found' });
+  }
+  // Send message to receiver and sync it across sender's devices
+  const sendMessageToDevie = async (device) => {
+    // Simulating sending message to device via API
+    console.log(`Message sent to device ${device.deviceId}: ${message}`);
+  }
+  // Sync message across sender's linked devices
+  await Promise.all(sender.devices.map(sendMessageToDevie));
+  res.status(200).json({ message: 'Message sent successfully' });
+  };
+
+  // Sync call logs across devices
+const syncCallLogs = async (userId, callLog) => {
+  const user = await User.findById(userId).populate('devices');
+
+  const syncToDevice = async (device) => {
+      // Simulating syncing call log via some API or service
+      console.log(`Call log synced to device ${device.deviceName}: ${callLog}`);
+  };
+
+  await Promise.all(user.devices.map(syncToDevice));
+};
 
 module.exports = {
     register,
@@ -195,5 +229,6 @@ module.exports = {
     addDevice,
     removeDevice,
     linkDevice,
-    unlinkDevice
+    unlinkDevice,
+    sendMessage,
 }
