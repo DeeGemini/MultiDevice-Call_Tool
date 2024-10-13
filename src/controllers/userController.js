@@ -290,5 +290,7 @@ module.exports = {
     unlinkDevice,
     sendMessage,
     handleIncomingCall,
-    getAccessibleDevices
-}
+    getAccessibleDevices,
+    makeCallAccessible,
+    switchDevice
+};
