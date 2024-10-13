@@ -27,3 +27,16 @@ router.use('/secure-route', authenticateUserAndDevice, (req, res) => {
 });
 // Switch device route
 router.post('/switch-device', authenticateUserAndDevice, switchDevice);
+// Sync data across devices route
+router.post('/sync-data-across-devices', authenticateUserAndDevice, syncDataAcrossDevices);
+// Fetch all users route
+router.get('/findAll', (req, res) => {
+    User.find()
+        .then((users) => {
+            res.json(users);
+        })
+        .catch(err => {
+            res.status(500).json({ error: err.message });
+        });
+});
+module.exports = router;
