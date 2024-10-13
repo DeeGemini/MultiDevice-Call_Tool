@@ -246,6 +246,41 @@ const getAccessibleDevices = async (req, res) => {
   res.status(200).json({ devices: user.devices });
 };
 
+// Make a call accessible on multiple devices
+const makeCallAccessible = async (req, res) => {
+  const { userId, callDetails } = req.body;
+  // Simulate making call accessible across devices
+  const user = await User.findById(userId).populate('devices');
+  if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+  }
+
+  user.devices.forEach(device => {
+      console.log(`Making call accessible on device: ${device.deviceName}`);
+      // Simulate the actual logic to make the call accessible
+  });
+
+  res.status(200).json({ message: 'Call made accessible on all devices' });
+};
+
+// Switch Devices
+const switchDevice = async (req, res) => {
+  const { userId, currentDeviceId, newDeviceId } = req.body;
+
+  const user = await User.findById(userId).populate('devices');
+  if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+  }
+
+  const newDevice = user.devices.find(device => device.deviceId === newDeviceId);
+  if (!newDevice) {
+      return res.status(400).json({ message: 'New device not linked to user' });
+  }
+
+  console.log(`Switched from device ${currentDeviceId} to ${newDeviceId}`);
+  res.status(200).json({ message: `Switched to device: ${newDevice.deviceName}` });
+};
+
 module.exports = {
     register,
     login,
