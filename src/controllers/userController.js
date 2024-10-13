@@ -281,6 +281,25 @@ const switchDevice = async (req, res) => {
   res.status(200).json({ message: `Switched to device: ${newDevice.deviceName}` });
 };
 
+// Real-time data synchronization
+const syncDataAcrossDevices = async (req, res) => {
+  const { userId, dataType, data } = req.body;
+
+  const user = await User.findById(userId).populate('devices');
+  if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+  }
+
+  const syncToDevice = async (device) => {
+      // Simulate data synchronization
+      console.log(`Syncing ${dataType} to device ${device.deviceName}: ${data}`);
+  };
+
+  await Promise.all(user.devices.map(syncToDevice));
+
+  res.status(200).json({ message: `${dataType} synced across devices` });
+};
+
 module.exports = {
     register,
     login,
@@ -292,5 +311,7 @@ module.exports = {
     handleIncomingCall,
     getAccessibleDevices,
     makeCallAccessible,
-    switchDevice
+    switchDevice,
+    syncDataAcrossDevices,
+    findAll
 };
