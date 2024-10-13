@@ -16,3 +16,14 @@ router.post('/unlink-device', authenticateUserAndDevice, unlinkDevice);
 router.post('/link-device', authenticateUserAndDevice, linkDevice);
 // Message management routes
 router.post('/sendMessage', authenticateUserAndDevice, sendMessage);
+// Call management routes
+router.post('/handle-incoming-call', authenticateUserAndDevice, handleIncomingCall);
+// Accessibility routes
+router.get('/get-accessible-devices/:userId', authenticateUserAndDevice, getAccessibleDevices);
+router.post('/make-call-accessible', authenticateUserAndDevice, makeCallAccessible);
+// Using the middleware in a secure route
+router.use('/secure-route', authenticateUserAndDevice, (req, res) => {
+    res.status(200).json({ message: 'Access granted', user: req.user, device: req.device });
+});
+// Switch device route
+router.post('/switch-device', authenticateUserAndDevice, switchDevice);
