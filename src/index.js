@@ -11,7 +11,7 @@ app.use(express.json());
 app.use('/api', userRoutes);
 
 // Connect to MongoDB
-const client = new MongoClient("mongodb+srv://nicsadyngwenya:yqse7hTVC3jZ59Ro@cluster0.tc7f1.mongodb.net/?w=majority&appName=Cluster0");
+const client = new MongoClient(process.env.MONGO_URI);
 async function run() {
     try {
         // Connect the client to the server
@@ -46,4 +46,9 @@ app.listen(PORT, async () => {
         await close(); // Close the MongoDB connection on server shutdown
         process.exit(0);
     });
+});
+
+// Simple route to check if server is running
+app.get('/', (req, res) => {
+    res.send('API is running');
 });
