@@ -7,6 +7,8 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 // Middleware
 app.use(express.json());
+// Routes
+app.use('/api', userRoutes);
 
 // Connect to MongoDB
 const client = new MongoClient("mongodb+srv://nicsadyngwenya:yqse7hTVC3jZ59Ro@cluster0.tc7f1.mongodb.net/?w=majority&appName=Cluster0");
@@ -44,4 +46,4 @@ app.listen(PORT, async () => {
         await close(); // Close the MongoDB connection on server shutdown
         process.exit(0);
     });
-})
+});
