@@ -1,6 +1,7 @@
 // Setting up Express Server
 const express = require('express');
 const { MongoClient } = require('mongodb');
+const userRoutes = require('./routes/userRoutes');
 const PORT = process.env.PORT || 5000;
 // Init app
 const app = express();
@@ -8,7 +9,7 @@ const app = express();
 app.use(express.json());
 
 // Connect to MongoDB
-const client = new MongoClient("mongodb+srv://nicsadyngwenya:zA5qJpVfLRgQX5XH@cluster0.nvzsxh8.mongodb.net/?w=majority&appName=Cluster0");
+const client = new MongoClient("mongodb+srv://nicsadyngwenya:yqse7hTVC3jZ59Ro@cluster0.tc7f1.mongodb.net/?w=majority&appName=Cluster0");
 async function run() {
     try {
         // Connect the client to the server
