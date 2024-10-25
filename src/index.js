@@ -1,5 +1,6 @@
 // Setting up Express Server
-require('dotenv').config();
+const dotenv = require('dotenv');
+dotenv.config();
 const express = require('express');
 const { MongoClient } = require('mongodb');
 const userRoutes = require('./routes/userRoutes');
@@ -12,7 +13,7 @@ app.use(express.json());
 app.use('/api', userRoutes);
 
 // Connect to MongoDB
-const client = new MongoClient(process.env.MONGO_URI);
+const client = new MongoClient(process.env.MONGODB_URI);
 async function run() {
     try {
         // Connect the client to the server
