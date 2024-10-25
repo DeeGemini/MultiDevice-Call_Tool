@@ -52,5 +52,5 @@ app.listen(PORT, async () => {
 
 // Simple route to check if server is running
 app.get('/', (req, res) => {
-    res.send('API is running');
+    res.send('Welcome to MDC-Tool Server!!!');
 });
