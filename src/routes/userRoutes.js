@@ -7,6 +7,8 @@ const Device = require('../models/Device');
 
 // Register route
 router.post('/register', register);
+// Verify user route
+router.post('/verifyUser', verifyUser);
 // Login route
 router.post('/login', login);
 // Device management routes
