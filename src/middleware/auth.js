@@ -4,7 +4,7 @@ const User = require('../models/User');
 // Middleware to authenticate user using JWT and device
 const authenticateUserAndDevice = async (req, res, next) => {
     // Extract token from the headers
-    const token = req.header('x-auth-token');
+    const token = req.header('Authorization')?.split(' ')[1];
 
     if (!token) {
         return res.status(401).json({ message: 'No token, authorization denied' });
